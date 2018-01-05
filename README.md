@@ -30,7 +30,7 @@ compile 'com.github.liqinew:mytoast:V.1.0.0'
 <image src="./image/demo_02.gif" width="400px" height="700px"/>
 
 #### 界面左右偏距效果案例
-<image src="./image/demo_03.gif" width="400px" height="700px"/>
+<image src="./image/demo_03.gif" width="400px" height="200px"/>
 ### A P I
 
 #### OnCycleViewPagerListener接口操作API(非静态调用)
