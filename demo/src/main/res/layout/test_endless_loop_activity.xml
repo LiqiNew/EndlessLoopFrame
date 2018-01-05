@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@android:color/white"
+              android:orientation="vertical">
+
+    <fragment
+        android:id="@+id/fragment_cycle_viewpager"
+        android:name="com.liqi.endlessloop.CycleViewPager"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/test_endless_loop_01"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:textSize="14sp"
+                android:text="开启轮播"/>
+
+            <Button
+                android:id="@+id/test_endless_loop_02"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:textSize="14sp"
+                android:text="关闭轮播\n（先开启轮播后点击才能看效果）"/>
+
+            <Button
+                android:id="@+id/test_endless_loop_03"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:textSize="14sp"
+                android:text="添加展示数据\n（先开启轮播后点击才能看效果）"/>
+
+            <Button
+                android:id="@+id/test_endless_loop_04"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:textSize="14sp"
+                android:text="替换展示数据\n（先开启轮播后点击才能看效果）"/>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
