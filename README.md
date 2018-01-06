@@ -48,7 +48,7 @@ compile 'com.github.liqinew:endlessloopframe:V.1.0.0'
 ```java
 CycleViewPager mCycleViewPager=(CycleViewPager)getSupportFragmentManager().findFragmentById(R.id.fragment_cycle_viewpager);
 ```
-#### 轮播案例效果
+#### 一：轮播案例效果
 
 * **效果图**
 <image src="./image/demo_01.gif" width="400px" height="700px"/>
@@ -78,11 +78,11 @@ openWheel();
 */
 closeWheel();
 ```
-**数据添加和替换(OnViewPagerDataListener接口API请查阅底部)<br><br>
+* **数据添加和替换(OnViewPagerDataListener接口API请查阅底部)
 通过OnCycleViewPagerListener接口openWheel()或者closeWheel()方法获取OnViewPagerDataListener接口，<br>
 然后通过OnViewPagerDataListener接口API去操作。<br>**
 
-#### 手势无限循环滑动+图片手势滑动缩放案例效果
+#### 二：手势无限循环滑动+图片手势滑动缩放案例效果
 
 * **效果图**
 
@@ -111,7 +111,7 @@ touchImageView.setLayoutParams(lp);
 touchImageView.setImageResource(R.drawable.xxxx);
 ```
 
-#### 界面左右偏距效果案例
+#### 三：界面左右偏距效果案例
 
 * **效果图**
 
