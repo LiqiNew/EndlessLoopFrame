@@ -1,4 +1,4 @@
-[![](https://jitpack.io/v/liqinew/widgetutils.svg)](https://jitpack.io/#liqinew/widgetutils)
+[![](https://jitpack.io/v/liqinew/endlessloopframe.svg)](https://jitpack.io/#liqinew/endlessloopframe)
 [![](https://img.shields.io/badge/%E4%BD%9C%E8%80%85-%E6%9D%8E%E5%A5%87-orange.svg)](https://github.com/LiqiNew)
 
 # EndlessLoopFrame
@@ -17,20 +17,110 @@ allprojects {
 　　}
 }
 ```
-**2：依赖MyToast**<br>
+**2：依赖EndlessLoopFrame**<br>
 ```gradle
-compile 'com.github.liqinew:mytoast:V.1.0.0'
+compile 'com.github.liqinew:endlessloopframe:V.1.0.0'
 ```
 
 ### 三种效果案例实现
+
+#### XML布局定义
+
+* **XML定义一（设置为android:name="com.liqi.endlessloop.CycleViewPager"）**
+```xml
+    <fragment
+        android:id="@+id/fragment_cycle_viewpager"
+        android:name="com.liqi.endlessloop.CycleViewPager"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"/>
+```
+* **XML定义二（设置为class="com.liqi.endlessloop.CycleViewPager"）**
+```xml
+    <fragment
+        android:id="@+id/fragment_cycle_viewpager"
+        class="com.liqi.endlessloop.CycleViewPager"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"/>
+```
+#### 获取XML中定义的CycleViewPager
+
+* **继承AppCompatActivity对象**
+```java
+CycleViewPager mCycleViewPager=(CycleViewPager)getSupportFragmentManager().findFragmentById(R.id.fragment_cycle_viewpager);
+```
 #### 轮播案例效果
+
+* **效果图**
 <image src="./image/demo_01.gif" width="400px" height="700px"/>
 
+* **"轮播"代码实现**
+
+**参数设置(OnCycleViewPagerListener接口提供设置API)**
+```java
+/**
+* 参阅底部OnCycleViewPagerListener接口API设置
+*/
+...
+
+/**
+* 开启轮播，默认不轮播,轮播一定是循环的
+*
+* @return OnViewPagerDataListener
+*/
+openWheel();
+
+/**
+* 关闭轮播.并设置是否开启循环
+*
+* @param isCycle 是否开启循环
+*
+* @return OnViewPagerDataListener
+*/
+closeWheel();
+```
+**数据添加和替换(OnViewPagerDataListener接口API请查阅底部)<br><br>
+通过OnCycleViewPagerListener接口openWheel()或者closeWheel()方法获取OnViewPagerDataListener接口，<br>
+然后通过OnViewPagerDataListener接口API去操作。<br>**
+
 #### 手势无限循环滑动+图片手势滑动缩放案例效果
+
+* **效果图**
+
 <image src="./image/demo_02.gif" width="400px" height="700px"/>
 
+* **"手势无限循环滑动"代码实现注意事项**
+
+**参数还是调用OnCycleViewPagerListener接口提供的API去设置**<br>
+
+**1：切勿调用OnCycleViewPagerListener接口中openWheel()方法去开启轮播。**<br>
+
+**2：记得把OnCycleViewPagerListener接口setCycle(true)方法设置为true。如果不无限循环滑动得话，请设置为false。**<br>
+
+* **"图片手势滑动缩放"代码实现**
+
+**把传输给CycleViewPager的ImageView值对象变成TouchImageView对象，TouchImageView是继承ImageView自定扩展对象**
+
+```java
+/**
+* TouchImageView的API同ImageView一致
+*/
+TouchImageView touchImageView = new TouchImageView(this);
+touchImageView.setBackgroundColor(Color.parseColor("#000000"));
+LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+touchImageView.setLayoutParams(lp);
+touchImageView.setImageResource(R.drawable.xxxx);
+```
+
 #### 界面左右偏距效果案例
+
+* **效果图**
+
 <image src="./image/demo_03.gif" width="400px" height="200px"/>
+
+* **"界面左右偏距"代码实现**
+
+**调用OnCycleViewPagerListener接口中leftRightDisplayOffset(50,50)设置左右偏距即可**
+
 ### A P I
 
 #### OnCycleViewPagerListener接口操作API(非静态调用)

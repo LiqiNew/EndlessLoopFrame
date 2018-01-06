@@ -35,7 +35,7 @@ public class TestEndlessLoopActivity extends AppCompatActivity implements OnImag
         final OnCycleViewPagerListener viewPagerListener = mCycleViewPager.setCycle(true)
                 .setTime(2)
                // .setIndicatorTopCenter()
-               .leftRightDisplayOffset(50,50)
+               //.leftRightDisplayOffset(50,50)
                 .setBackgroundColorId(android.R.color.white)
                 .startLoadData(imageViews, this);
         //开启轮播
