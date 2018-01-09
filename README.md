@@ -92,7 +92,7 @@ closeWheel();
 
 **参数还是调用OnCycleViewPagerListener接口提供的API去设置**<br>
 
-**1：切勿调用OnCycleViewPagerListener接口中openWheel()方法去开启轮播。**<br>
+**1：如果不需要轮播，请勿调用OnCycleViewPagerListener接口中openWheel()方法去开启轮播。**<br>
 
 **2：记得把OnCycleViewPagerListener接口setCycle(true)方法设置为true。如果不无限循环滑动得话，请设置为false。**<br>
 
