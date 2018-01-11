@@ -3,6 +3,9 @@
 
 # EndlessLoopFrame
 支持轮询，无限循环滑动，图片手势缩放等效果。
+### 内部远程依赖Library（已经远程依赖的Library，切勿重复依赖。）
+
+**appcompat-v7：'com.android.support:appcompat-v7:25.2.0'**<br>
 
 # 如何使用?
 
