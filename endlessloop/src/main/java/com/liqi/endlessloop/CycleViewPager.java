@@ -96,25 +96,27 @@ public class CycleViewPager extends Fragment implements OnPageChangeListener, On
             @Override
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
-                if (msg.what == WHEEL && mImageViews.size() != 0) {
-                    if (!mIsScrolling) {
-                        int max = mImageViews.size() + 1;
-                        int position = (mCurrentPosition + 1)
-                                % mImageViews.size();
-                        mViewPager.setCurrentItem(position, true);
-                        if (position == max) { // 最后一页时回到第一页
-                            mViewPager.setCurrentItem(1, false);
+                if (null != mImageViews) {
+                    if (msg.what == WHEEL && mImageViews.size() != 0) {
+                        if (!mIsScrolling) {
+                            int max = mImageViews.size() + 1;
+                            int position = (mCurrentPosition + 1)
+                                    % mImageViews.size();
+                            mViewPager.setCurrentItem(position, true);
+                            if (position == max) { // 最后一页时回到第一页
+                                mViewPager.setCurrentItem(1, false);
+                            }
                         }
-                    }
 
-                    mReleaseTime = System.currentTimeMillis();
-                    mHandler.removeCallbacks(RUNNABLE);
-                    mHandler.postDelayed(RUNNABLE, mTime);
-                    return;
-                }
-                if (msg.what == WHEEL_WAIT && mImageViews.size() != 0) {
-                    mHandler.removeCallbacks(RUNNABLE);
-                    mHandler.postDelayed(RUNNABLE, mTime);
+                        mReleaseTime = System.currentTimeMillis();
+                        mHandler.removeCallbacks(RUNNABLE);
+                        mHandler.postDelayed(RUNNABLE, mTime);
+                        return;
+                    }
+                    if (msg.what == WHEEL_WAIT && mImageViews.size() != 0) {
+                        mHandler.removeCallbacks(RUNNABLE);
+                        mHandler.postDelayed(RUNNABLE, mTime);
+                    }
                 }
             }
         };
@@ -280,20 +282,22 @@ public class CycleViewPager extends Fragment implements OnPageChangeListener, On
 
     @Override
     public void onPageSelected(int arg0) {
-        int max = mImageViews.size() - 1;
-        int position = arg0;
-        mCurrentPosition = arg0;
-        if (mIsCycle) {
-            if (arg0 == 0) {
-                mCurrentPosition = max - 1;
-            } else if (arg0 == max) {
-                mCurrentPosition = 1;
+        if (null != mImageViews) {
+            int max = mImageViews.size() - 1;
+            int position = arg0;
+            mCurrentPosition = arg0;
+            if (mIsCycle) {
+                if (arg0 == 0) {
+                    mCurrentPosition = max - 1;
+                } else if (arg0 == max) {
+                    mCurrentPosition = 1;
+                }
+                position = mCurrentPosition - 1;
             }
-            position = mCurrentPosition - 1;
-        }
-        setIndicator(position);
-        if (null != mOnPageChangeListener) {
-            mOnPageChangeListener.onPageSelected(arg0);
+            setIndicator(position);
+            if (null != mOnPageChangeListener) {
+                mOnPageChangeListener.onPageSelected(arg0);
+            }
         }
     }
 
@@ -598,23 +602,25 @@ public class CycleViewPager extends Fragment implements OnPageChangeListener, On
     }
 
     private void initIndicatorState() {
-        if (mIndicatorLayout.getChildCount() > 0) {
+        if (null != mIndicatorLayout && mIndicatorLayout.getChildCount() > 0) {
             mIndicatorLayout.removeAllViews();
         }
-        int ivSize = this.mImageViews.size();
-        //设置指示器设置指示器
-        mIndicators = new ImageView[ivSize];
-        for (int i = 0; i < mIndicators.length; i++) {
-            Activity activity = getActivity();
-            if (null != activity) {
-                View view = LayoutInflater.from(activity).inflate(
-                        R.layout.view_cycle_viewpager_indicator, null);
-                mIndicators[i] = (ImageView) view.findViewById(R.id.image_indicator);
-                mIndicatorLayout.addView(view);
+        if (null != mImageViews) {
+            int ivSize = this.mImageViews.size();
+            //设置指示器设置指示器
+            mIndicators = new ImageView[ivSize];
+            for (int i = 0; i < mIndicators.length; i++) {
+                Activity activity = getActivity();
+                if (null != activity) {
+                    View view = LayoutInflater.from(activity).inflate(
+                            R.layout.view_cycle_viewpager_indicator, null);
+                    mIndicators[i] = (ImageView) view.findViewById(R.id.image_indicator);
+                    mIndicatorLayout.addView(view);
+                }
             }
+            // 触发重新计算指示器指向
+            setIndicator(mCurrentPosition > 0 ? mCurrentPosition - 1 : mCurrentPosition);
         }
-        // 触发重新计算指示器指向
-        setIndicator(mCurrentPosition > 0 ? mCurrentPosition - 1 : mCurrentPosition);
     }
 
     @Override

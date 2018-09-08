@@ -22,7 +22,7 @@ allprojects {
 ```
 **2：依赖EndlessLoopFrame**<br>
 ```gradle
-compile 'com.github.liqinew:endlessloopframe:V.1.0.0'
+compile 'com.github.liqinew:endlessloopframe:V.1.0.1'
 ```
 
 ### 三种效果案例实现
